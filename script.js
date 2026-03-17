@@ -9,6 +9,7 @@ sumador = 1;
 
 //  2. Intentar cargar valor guardado
 let guardado = localStorage.getItem("contador");
+let guardado2 = localStorage.getItem("sumador");
 
 // 3. Crear variable contador
 let contador;
@@ -22,8 +23,19 @@ if (guardado !== null) {
   contador = 0;
 }
 
+if (guardado2 !== null) {
+  // Si hay valor → convertirlo a número
+  sumador = parseInt(guardado2);
+} else {
+  // Si no hay nada empezar en 0
+  sumador = 1;
+}
+
+
 // 5. Mostrar valor inicial en pantalla
 texto.textContent = contador;
+texto2.textContent = sumador;
+
 
 //  6. Cuando haces click en sumar
 boton.onclick = function() {
@@ -57,8 +69,15 @@ reset.onclick = function() {
 
 boton2.onclick = function() {
 
-  // Sumar 1
+  // funcion principal
+  
+if (contador >= 15) {
+  contador = contador - 15;
   sumador = sumador + 1;
+  texto2.textContent = sumador;
+  texto.textContent = contador;
+} else {
+}
   
   // Actualizar pantalla
   texto2.textContent = sumador;
