@@ -6,6 +6,9 @@ let boton2 = document.getElementById("boton2");
 let reset = document.getElementById("reset");
 let sumador  = document.getElementById("sumador");
 sumador = 1;
+let coste = 15;
+let auto = 0;
+let textoauto = document.getElementById("auto");
 
 //  2. Intentar cargar valor guardado
 let guardado = localStorage.getItem("contador");
@@ -32,6 +35,18 @@ if (guardado2 !== null) {
 }
 
 
+let guardadoauto = localStorage.getItem("auto");
+
+if (guardadoauto !== null) {
+  auto = parseInt(guardadoauto);
+} else {
+auto = 0 
+}
+
+
+
+
+
 // 5. Mostrar valor inicial en pantalla
 texto.textContent = contador;
 texto2.textContent = sumador;
@@ -56,6 +71,8 @@ reset.onclick = function() {
   // Volver a 0
   contador = 0;
   sumador = 1;
+  auto = 0;
+  coste = 15;
 
   // Actualizar pantalla
   texto.textContent = contador;
@@ -71,14 +88,14 @@ boton2.onclick = function() {
 
   // funcion principal
   
-if (contador >= 15) {
-  contador = contador - 15;
+if (contador >= coste) {
+  contador = contador - coste;
   sumador = sumador + 1;
   texto2.textContent = sumador;
   texto.textContent = contador;
-} else {
+  coste = coste + 20;
 }
-  
+
   // Actualizar pantalla
   texto2.textContent = sumador;
 
@@ -86,3 +103,41 @@ if (contador >= 15) {
   // Guardar en localStorage
   localStorage.setItem("sumador", sumador);
 };
+
+
+	// auto click
+	
+setInterval(function() {
+
+  contador = contador + auto;
+
+  texto.textContent = contador;
+
+  localStorage.setItem("contador", contador);
+  
+  textoauto.textContent = auto;
+
+}, 1000);
+
+
+
+	//boton autoclick
+	
+let botonauto = document.getElementById("botonauto");
+	
+botonauto.onclick = function() {
+
+  if (contador >= 50) {
+    contador -= 50;
+    auto += 1;
+
+    texto.textContent = contador;
+    textoauto.textContent = auto;
+
+    localStorage.setItem("contador", contador);
+    localStorage.setItem("auto", auto);
+  }
+
+};
+
+
